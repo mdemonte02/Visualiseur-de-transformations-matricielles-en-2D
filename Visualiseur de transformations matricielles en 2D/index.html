@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transformations matricielles 2D — première version</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="matrices.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Calcul matriciel · Premier avancement</p>
+      <h1>Visualiseur de transformations 2D</h1>
+      <p>Définissez un polygone, puis observez l'effet de transformations matricielles successives.</p>
+    </header>
+    <div class="layout">
+      <section class="panel controls" aria-label="Paramètres">
+        <h2>1. Sommets du polygone</h2>
+        <p>Un point par ligne, au format <code>x,y</code> (au moins 3 points).</p>
+        <textarea id="points" rows="6" spellcheck="false">0,0
+4,0
+2,3</textarea>
+        <button id="update">Afficher le polygone</button>
+        <h2>2. Transformation</h2>
+        <label for="transformation">Choisissez une opération</label>
+        <select id="transformation">
+          <option value="translation">Translation (a, b)</option>
+          <option value="scaleX">Échelle horizontale (k)</option>
+          <option value="scaleY">Échelle verticale (k)</option>
+          <option value="rotation90">Rotation de 90° antihoraire</option>
+        </select>
+        <div id="params" class="params">
+          <label for="a">Déplacement horizontal a</label>
+          <input id="a" type="number" value="2" step="any">
+          <label for="b">Déplacement vertical b</label>
+          <input id="b" type="number" value="1" step="any">
+          <label for="k" hidden>Facteur k</label>
+          <input id="k" type="number" value="1.5" step="any" hidden>
+        </div>
+        <button id="apply" class="primary">Appliquer la transformation</button>
+        <button id="reset" class="secondary">Réinitialiser les transformations</button>
+        <p id="message" role="status" class="message"></p>
+        <h2>3. Historique</h2>
+        <ol id="history"><li>Aucune transformation appliquée.</li></ol>
+      </section>
+      <section class="panel visualization" aria-label="Graphique">
+        <h2>Repère cartésien</h2>
+        <div class="legend"><span><i class="swatch original"></i> Original</span><span><i class="swatch transformed"></i> Transformé</span></div>
+        <canvas id="graph" width="760" height="600" aria-label="Polygone original et transformé dans un repère cartésien"></canvas>
+        <p class="hint">Le repère s'adapte automatiquement aux coordonnées des points.</p>
+        <p id="matrixInfo" class="matrix"></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
